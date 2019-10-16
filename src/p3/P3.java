@@ -25,12 +25,12 @@ public class P3 {
    RandomAccessFile file = new RandomAccessFile(fichero, "rw");
    //arrays con los datos
    String dni[] = {"75709653R","80153417G","13456789X"};//dni 
-   String nombre[] = {"maría","ruben","alberto"};       //nombreartamentos
+   String nombre[] = {"maría","rubén","alberto"};       //nombreartamentos
    String cod[]={"14200","14222","10019"};//cod
    
    StringBuffer bufferDNI = null;//buffer para almacenar dni
    StringBuffer bufferNOM = null;// buffer para almacenar nombre
-   StringBuffer bufferCOD = null;
+   StringBuffer bufferCOD = null;//buffer para almacenar  el código postal
    int n=dni.length;//numero de elementos del array
     
    for (int i=0;i<n; i++){ //recorro los arrays          	  
@@ -43,7 +43,7 @@ public class P3 {
     bufferNOM.setLength(10); //10 caracteres para el nombre
     file.writeChars(bufferNOM.toString());//insertar nombre
 	
-     bufferCOD = new StringBuffer( nombre[i] );      
+     bufferCOD = new StringBuffer( cod[i] );      
     bufferCOD.setLength(5); //5 caracteres para el codigo post
     file.writeChars(bufferCOD.toString());//insertar código post
     
@@ -51,6 +51,8 @@ public class P3 {
    file.close();  //cerrar fichero 
    leer();
     }
+    
+    
     public static void leer() throws FileNotFoundException, IOException{
          File fichero = new File("AleatorioP3.dat");
   
@@ -84,7 +86,7 @@ public class P3 {
       
       for (int i = 0; i < codigo.length; i++) {         
          aux = file.readChar(); 
-         nombre[i] = aux;    
+         codigo[i] = aux;    
       }
 
      
@@ -92,11 +94,11 @@ public class P3 {
       
       
 	if(id >0)
-        System.out.printf("ID: %s, DNI: %s, Nombre: %s, Código Postal: %s\n",
+        System.out.printf("ID: %s, DNI: %s, Nombre: %s, Código Postal: %s \n",
         	id,   dniS.trim(),nombreS.trim(),codigoS.trim());     
 	
       //me posiciono para el sig empleado, cada empleado ocupa 36 bytes
-      posicion= posicion + 36;	 
+      posicion= posicion + 52;	 
 
 	//Si he recorrido todos los bytes salgo del for	 	  
       if (file.getFilePointer() == file.length())
